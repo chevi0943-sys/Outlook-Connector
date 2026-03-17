@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>Open Outlook Draft</title>
+</head>
+
+<body>
+
+
+    <div class="main-container">
+        <div class="header-section">
+            <h2>יצירת טיוטת מייל ב-Outlook</h2>
+            <h1>מערכת ניהול הפצת קורות חיים</h1>
+            <p>מלאי את פרטי המועמד ולחצי על "שליחה" כדי ליצור טיוטות ב-Outlook המקומי. המערכת תומכת בצירוף קבצים ושליחה
+                מרובת נמענים.</p>
+        </div>
+
+        <form id="mailForm">
+            <label>נושא המייל</label>
+            <input type="text" name="subject" placeholder="לדוגמה: הגשת מועמדות למשרת מפתח Full Stack">
+
+            <label>נמענים (מופרדים בפסיק)</label>
+            <input type="text" name="recipients" placeholder="hr@company.com, jobs@tech.io">
+
+            <label>גוף ההודעה</label>
+            <textarea name="body" rows="6" placeholder="שלום רב, מצורפים קורות החיים שלי..."></textarea>
+
+            <label class="file-label">צרפי קורות חיים (PDF/Word)</label>
+            <input type="file" name="attachment">
+
+            <button type="submit">יצירת טיוטות ב-Outlook</button>
+        </form>
+    </div>
+
+
+
+    <script>
+        const form = document.getElementById('mailForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            const originalText = btn.innerText;
+
+            // שינוי עיצוב הכפתור בזמן העבודה
+            btn.innerText = 'פותח טיוטות...';
+            btn.style.background = '#f39c12';
+
+            const data = new FormData(form);
+            const response = await fetch('http://localhost:5000/sendMail', {
+                method: 'POST',
+                body: data
+            });
+
+            btn.innerText = originalText;
+            btn.style.background = '#2ecc71';
+
+            if (response.ok) {
+                // אין צורך ב-Alert אם החלון של אאוטלוק כבר קפץ, זה ברור שזה עבד!
+            }
+        });
+        // form.addEventListener('submit', async (e) => {
+        //     e.preventDefault();
+        //     const data = new FormData(form);
+
+        //     const response = await fetch('http://localhost:5000/sendMail', {
+        //         method: 'POST',
+        //         body: data
+        //     });
+
+        //     if (response.ok) {
+        //         alert('טיוטות נפתחו ב-Outlook!');
+        //     } else {
+        //         alert('שגיאה, בדוק את השרת ואת Outlook.');
+        //     }
+        // });
+    </script>
+</body>
+
+</html>
