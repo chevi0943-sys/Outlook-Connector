@@ -6,6 +6,7 @@ A professional **Full-Stack solution** designed to bridge the gap between web ap
 
 ## 📝 The Technical Challenge
 Modern web browsers operate in a **Sandbox environment**, which prevents direct interaction with local software like Microsoft Outlook or access to the local file system for security reasons. Standard solutions like `mailto:` links do not support high-quality file attachments or the automated creation of multiple separate drafts.
+![outlook](https://github.com/user-attachments/assets/3bcace77-4f8c-494c-8cab-084a66a23d91)
 
 ## 💡 The Solution: Local Agent Architecture
 This project implements a **Local Agent architecture** to bypass browser limitations:
